@@ -13,6 +13,7 @@
 - Flask 2.0.1
 - SQLite
 - HTML/CSS
+- Gemini key
 
 ## Notes
 - Gemini API keys required
