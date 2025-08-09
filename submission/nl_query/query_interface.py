@@ -3,15 +3,16 @@ import sqlite3
 import re
 import google.generativeai as genai
 from flask import Blueprint
-
+# Configure Gemini API
+genai.configure(api_key="Gemini key")
 
 def get_db():
     conn = sqlite3.connect('quickdocs.db')
     conn.row_factory = sqlite3.Row
     return conn
 
-# Configure Gemini API
-genai.configure(api_key="AIzaSyAjlYcvvzj2DYXEYNunOzRL-G01WUMOqsc")
+
+
 
 def generate_answer_gemini(context_chunks, query):
     context = "\n".join(context_chunks)
