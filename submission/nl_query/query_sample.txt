@@ -1,0 +1,42 @@
+
+```text
+# Example Queries and Results
+
+1. Query: "show all customers"
+SQL: SELECT * FROM customers
+Results:
+id  name            email                   phone           registration_date
+1   Amit Sharma     amit.sharma@email.com   9876543210      2025-08-06 17:33:00
+2   Priya Patel     priya.patel@email.com   9876543211      2025-08-06 17:33:00
+...
+
+2. Query: "list all pending processes"
+SQL: SELECT p.* FROM processes p JOIN process_assignments pa ON p.id = pa.process_id WHERE pa.status = 'pending'
+Results:
+id  name                    description                     status  created_at
+1   Home Loan Application   Complete application for home loan   active  2025-08-06 17:33:00
+...
+
+3. Query: "how many documents has Amit Sharma submitted"
+SQL: SELECT COUNT(*) as count FROM document_submissions ds JOIN customers c ON ds.customer_id = c.id WHERE c.name = 'Amit Sharma'
+Results:
+count
+3
+
+4. Query: "which process has the most documents"
+SQL: SELECT p.name, COUNT(ds.id) as doc_count FROM processes p LEFT JOIN document_submissions ds ON p.id = ds.process_id GROUP BY p.id ORDER BY doc_count DESC LIMIT 1
+Results:
+name                    doc_count
+Home Loan Application   3
+
+5. Query: "which customers are assigned to KYC Verification"
+SQL: SELECT c.name FROM customers c JOIN process_assignments pa ON c.id = pa.customer_id JOIN processes p ON pa.process_id = p.id WHERE p.name = 'KYC Verification'
+Results:
+name
+Amit Sharma
+Neha Gupta
+
+# Error Handling Example
+Query: "invalid query"
+Result: Error: Query not recognized
+```
