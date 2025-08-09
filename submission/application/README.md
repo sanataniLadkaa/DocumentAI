@@ -19,4 +19,5 @@
 ## Notes
 - Gemini API keys required is requred in app.py , doc_verifer.py , query_interface.py
 - Screenshots are in the /screenshots directory
+- doc_verifier.py is used to verify the documents 
 - The application runs on http://localhost:5000
