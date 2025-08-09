@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Registration</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <style>
+        /* table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; } */
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+nav {
+    background-color: #2c3e50;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #3498db;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+form h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+form select,
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+form input[type="submit"] {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #2c3e50;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e6f3fa;
+}
+
+.completed {
+    background-color: #90ee90;
+}
+
+.in-progress {
+    background-color: #ffffe0;
+}
+
+.pending {
+    background-color: #ffb6c1;
+}
+
+@media (max-width: 600px) {
+    form, table {
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <h2>Customer Registration</h2>
+    <nav>
+        <a href="{{ url_for('customer_registration') }}">Customer Registration</a> |
+        <a href="{{ url_for('document_submission') }}">Document Submission</a> |
+        <a href="{{ url_for('status_dashboard') }}">Status Dashboard</a> |
+        <a href="{{ url_for('query_interface') }}">Query Interface</a>
+    </nav>
+    <form method="POST">
+        <h3>Add Customer</h3>
+        Name: <input type="text" name="name" required><br>
+        Email: <input type="email" name="email" required><br>
+        Phone: <input type="text" name="phone"><br>
+        <input type="submit" name="add_customer" value="Add Customer">
+    </form>
+    
+    <form method="POST">
+        <h3>Assign Process</h3>
+        Customer: <select name="customer_id">
+            {% for customer in customers %}
+                <option value="{{ customer.id }}">{{ customer.name }}</option>
+            {% endfor %}
+        </select><br>
+        Process: <select name="process_id">
+            {% for process in processes %}
+                <option value="{{ process.id }}">{{ process.name }}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" name="assign_process" value="Assign Process">
+    </form>
+    
+    <h3>Customers</h3>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Registration Date</th></tr>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.registration_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
